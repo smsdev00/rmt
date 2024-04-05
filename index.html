@@ -1,12 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título de la página</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
-<body>
-    <!-- Your content goes here -->
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Removedor marcas de tiempo</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <style>
+      /* Add Roboto font */
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+      /* Apply Roboto font to body */
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      button.btn {
+        margin: 5px; /* Adjust this value as needed */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <form>
+            <div class="form-group">
+              <label for="working_area">Area de trabajo</label>
+              <textarea
+                class="form-control"
+                id="working_area"
+                rows="10"
+              ></textarea>
+            </div>
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-success"
+                id="button_delete_timestamps"
+              >
+                Borrar Marcas Tiempo
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="button_delete_textarea"
+              >
+                Borrar Area de Trabajo
+              </button>
+              <button type="button" class="btn btn-info" id="button_tutorial">
+                Tutorial
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      const textArea = document.getElementById("working_area");
+
+      function removeTimestamps(text) {
+        // Remove timestamps
+        var processedText = text.replace(
+          /\[\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}\.\d{3}\]/g,
+          ""
+        );
+
+        // Split text by newline characters, trim each line, and join back together
+        return processedText
+          .split("\n")
+          .map((line) => line.trim())
+          .join("\n");
+      }
+      // Named function to handle button click
+      function handle_button_delete_timestamps() {
+        var textArea = document.getElementById("working_area");
+        const proccessed_text = removeTimestamps(textArea.value);
+        textArea.value = proccessed_text;
+        console.log(proccessed_text);
+      }
+
+      function handle_button_delete_textarea() {
+        textArea.value = "";
+      }
+
+      function handle_button_tutorial() {
+        const tutorialText = `¡Bienvenido al tutorial!
+            El fin de está aplicación es borrar marcas de tiempo en un texto.
+            1. Pega el texto en el área de trabajo.
+            2. Haz clic en "Borrar Marcas Tiempo" para eliminar las marcas de tiempo del texto.
+            3. Si necesitas ayuda, haz clic en "Tutorial" para ver estas instrucciones nuevamente.`;
+
+        textArea.value = tutorialText;
+      }
+
+      // Select the button by id
+      const button_delete_timestamps = document.getElementById(
+        "button_delete_timestamps"
+      );
+
+      // Add event listener to the button
+      button_delete_timestamps.addEventListener(
+        "click",
+        handle_button_delete_timestamps
+      );
+
+      // Select the button by id
+      const button_delete_textarea = document.getElementById(
+        "button_delete_textarea"
+      );
+
+      // Add event listener to the button
+      button_delete_textarea.addEventListener(
+        "click",
+        handle_button_delete_textarea
+      );
+
+      const button_tutorial = document.getElementById("button_tutorial");
+
+      // Add event listener to the button
+      button_tutorial.addEventListener("click", handle_button_tutorial);
+    </script>
+  </body>
 </html>
