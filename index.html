@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Removedor marcas de tiempo</title>
+    <title>Removedor de marcas de tiempo</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -19,11 +19,23 @@
       button.btn {
         margin: 5px; /* Adjust this value as needed */
       }
+      .centered {
+        text-align: center;
+      }
+      .row_working_area {
+        background-color: rgb(234, 233, 233);
+        padding: 20px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="row">
+        <div class="col-12 centered">
+          <h1>REMOVEDOR MARCAS DE TIEMPO</h1>
+        </div>
+      </div>
+      <div class="row row_working_area">
         <div class="col-12">
           <form>
             <div class="form-group">
@@ -48,6 +60,14 @@
                 id="button_delete_textarea"
               >
                 Borrar Area de Trabajo
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-warning"
+                id="button_copy_textarea_to_clipboard"
+              >
+                Copiar al portapapeles
               </button>
               <button type="button" class="btn btn-info" id="button_tutorial">
                 Tutorial
@@ -75,14 +95,19 @@
       }
       // Named function to handle button click
       function handle_button_delete_timestamps() {
-        var textArea = document.getElementById("working_area");
         const proccessed_text = removeTimestamps(textArea.value);
         textArea.value = proccessed_text;
-        console.log(proccessed_text);
       }
 
       function handle_button_delete_textarea() {
         textArea.value = "";
+      }
+
+      function copyToClipboard() {
+        var textArea = document.getElementById("working_area");
+        textArea.select();
+        document.execCommand("copy");
+        alert("El texto ha sido copiado al portapapeles");
       }
 
       function handle_button_tutorial() {
@@ -121,6 +146,16 @@
 
       // Add event listener to the button
       button_tutorial.addEventListener("click", handle_button_tutorial);
+
+      const button_copy_textarea_to_clipboard = document.getElementById(
+        "button_copy_textarea_to_clipboard"
+      );
+
+      // Add event listener to the button
+      button_copy_textarea_to_clipboard.addEventListener(
+        "click",
+        copyToClipboard
+      );
     </script>
   </body>
 </html>
