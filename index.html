@@ -105,8 +105,16 @@
 
       function copyToClipboard() {
         var textArea = document.getElementById("working_area");
+        
+        // select textarea contents
         textArea.select();
+        
+        // copy textarea contents to clipboard
         document.execCommand("copy");
+        
+        // deselect textarea contents
+        textArea.setSelectionRange(textArea.selectionStart, textArea.selectionStart);
+
         alert("El texto ha sido copiado al portapapeles");
       }
 
