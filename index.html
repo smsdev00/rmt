@@ -84,10 +84,11 @@
 
       function removeTimestamps(text) {
         // Remove timestamps
-        var processedText = text.replace(
-          /\[\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}\.\d{3}\]/g,
-          ""
-        );
+        //var processedText = text.replace(
+        //  /\[\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}\.\d{3}\]/g,
+        //  ""
+        //);
+        const processedText = text.replace(/\[\d{2}:\d{2}(:\d{2})?\.\d{3}\s*(--&gt;|\-\-\>)\s*\d{2}:\d{2}(:\d{2})?\.\d{3}\]\s*/g, "");
 
         // Split text by newline characters, trim each line, and join back together
         return processedText
